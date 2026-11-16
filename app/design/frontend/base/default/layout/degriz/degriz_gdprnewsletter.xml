@@ -10,7 +10,6 @@
     <default>
         <reference name="head">
 			<action method="addItem" ifconfig="degriz_gdprnewsletter/general/isactive"><type>skin_css</type><name>css/degriz/gdprnewsletter/gdprnewsletter.css</name><params/></action>
-	        <action method="addJs" ifconfig="degriz_gdprnewsletter/general/jquery"><script>degriz/gdprnewsletter/jquery-1.11.2.min.js</script></action>
         </reference>
         <update handle="gdprnewsletter_handle" />
     </default>

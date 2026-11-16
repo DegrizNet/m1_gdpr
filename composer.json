@@ -1,0 +1,88 @@
+{
+    "name": "degriz/openmage-gdpr-newsletter",
+    "description": "GDPR consent checkbox and popup for newsletter subscription in OpenMage / Magento 1.9",
+    "type": "magento-module",
+    "license": "MIT",
+    "keywords": [
+        "openmage",
+        "magento1",
+        "gdpr",
+        "newsletter",
+        "consent"
+    ],
+    "homepage": "https://github.com/DegrizNet/m1_gdpr",
+    "authors": [
+        {
+            "name": "Anze Voh",
+            "homepage": "https://www.degriz.net/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    },
+    "extra": {
+        "map": [
+            [
+                "app/code/local/Degriz/Gdprnewsletter/Block/Newsletter.php",
+                "app/code/local/Degriz/Gdprnewsletter/Block/Newsletter.php"
+            ],
+            [
+                "app/code/local/Degriz/Gdprnewsletter/Block/Newsletter/Subscriber/Grid.php",
+                "app/code/local/Degriz/Gdprnewsletter/Block/Newsletter/Subscriber/Grid.php"
+            ],
+            [
+                "app/code/local/Degriz/Gdprnewsletter/Helper/Data.php",
+                "app/code/local/Degriz/Gdprnewsletter/Helper/Data.php"
+            ],
+            [
+                "app/code/local/Degriz/Gdprnewsletter/Model/Observer.php",
+                "app/code/local/Degriz/Gdprnewsletter/Model/Observer.php"
+            ],
+            [
+                "app/code/local/Degriz/Gdprnewsletter/Model/Subscriber.php",
+                "app/code/local/Degriz/Gdprnewsletter/Model/Subscriber.php"
+            ],
+            [
+                "app/code/local/Degriz/Gdprnewsletter/etc/adminhtml.xml",
+                "app/code/local/Degriz/Gdprnewsletter/etc/adminhtml.xml"
+            ],
+            [
+                "app/code/local/Degriz/Gdprnewsletter/etc/config.xml",
+                "app/code/local/Degriz/Gdprnewsletter/etc/config.xml"
+            ],
+            [
+                "app/code/local/Degriz/Gdprnewsletter/etc/system.xml",
+                "app/code/local/Degriz/Gdprnewsletter/etc/system.xml"
+            ],
+            [
+                "app/design/frontend/base/default/layout/degriz/degriz_gdprnewsletter.xml",
+                "app/design/frontend/base/default/layout/degriz/degriz_gdprnewsletter.xml"
+            ],
+            [
+                "app/design/frontend/base/default/template/degriz/gdprnewsletter/newsletter.phtml",
+                "app/design/frontend/base/default/template/degriz/gdprnewsletter/newsletter.phtml"
+            ],
+            [
+                "app/design/frontend/base/default/template/degriz/gdprnewsletter/newsletter_quickshop.phtml",
+                "app/design/frontend/base/default/template/degriz/gdprnewsletter/newsletter_quickshop.phtml"
+            ],
+            [
+                "app/etc/modules/Degriz_Gdprnewsletter.xml",
+                "app/etc/modules/Degriz_Gdprnewsletter.xml"
+            ],
+            [
+                "app/locale/en_US/Degriz_Gdprnewsletter.csv",
+                "app/locale/en_US/Degriz_Gdprnewsletter.csv"
+            ],
+            [
+                "app/locale/sl_SI/Degriz_Gdprnewsletter.csv",
+                "app/locale/sl_SI/Degriz_Gdprnewsletter.csv"
+            ],
+            [
+                "skin/frontend/base/default/css/degriz/gdprnewsletter/gdprnewsletter.css",
+                "skin/frontend/base/default/css/degriz/gdprnewsletter/gdprnewsletter.css"
+            ]
+        ]
+    }
+}

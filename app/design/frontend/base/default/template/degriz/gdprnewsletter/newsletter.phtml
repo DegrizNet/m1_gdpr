@@ -1,13 +1,10 @@
 <?php if ($this->getIsActive()):
 
-    $rnd_str = "";
-    $base_str = "0123456789abcdefghijklmnopqrstuvwxyz";
-    $su = strlen($base_str) - 1;
-    $rnd_str = substr($base_str, rand(0,$su), 1).substr($base_str, rand(0,$su), 1).substr($base_str, rand(0,$su), 1);
+    $rnd_str = substr(md5(uniqid('', true)), 0, 8);
 
 ?>
 	<div class="degriz_gdprnewsletter gdprnewsletter_<?php echo $rnd_str; ?>">
-		<label><input class="gdprnewsletter_confirmation checkbox required-entry" name="gdprnewsletter_confirmation" type="checkbox" id="gdprnewsletter_confirmation"><?php echo $this->getText() ?></label> <a href="javascript:void(0)" class="gdprnewsletter_box_open"><label class="gdprlabel_text" for="gdprpopup_<?php echo $rnd_str; ?>"><?php echo $this->getLink() ?></label></a>
+		<label><input class="gdprnewsletter_confirmation checkbox required-entry" name="gdprnewsletter_confirmation" type="checkbox" id="gdprnewsletter_confirmation_<?php echo $rnd_str; ?>"><?php echo $this->getText() ?></label> <a href="javascript:void(0)" class="gdprnewsletter_box_open"><label class="gdprlabel_text" for="gdprpopup_<?php echo $rnd_str; ?>"><?php echo $this->getLink() ?></label></a>
 		<input class="gdprpopup-state" id="gdprpopup_<?php echo $rnd_str; ?>" type="checkbox" />
 		<div class="gdprpopup_class">
 			<label class="gdprpopup_bg" for="gdprpopup_<?php echo $rnd_str; ?>"></label>
@@ -27,31 +24,29 @@
 			</div>
 		</div>
 	</div>
-<script type='text/javascript'>
-	jQuery(function($) {
-	    var $gdprBlock = $('.gdprnewsletter_<?php echo $rnd_str; ?>');
-	    var $gdprInput = $gdprBlock.find('input[name="gdprnewsletter_confirmation"]');
-	    var $blockButton = $gdprBlock.closest('form').find('button[type="submit"]');
-	    $blockButton.prop('disabled', true);
-	    $gdprBlock.find('.gdprpopup_yes').click(function(){
-	        $gdprInput.prop('checked', true);
-	        $gdprInput.trigger('change');
-	    });
-	    $gdprBlock.find('.gdprpopup_no').click(function(){
-	        $gdprInput.prop('checked', false);
-	        $gdprInput.trigger('change');
-	    });
-	    $gdprInput.change(function() {
-	        if(this.checked)
-	            $blockButton.prop('disabled', false);
-	        else
-	            $blockButton.prop('disabled', true);    
-	    });
-	    $gdprBlock.find('#gdprpopup_<?php echo $rnd_str; ?>').change(function() {
-	        $('body,html').toggleClass('modal_opened');
-	        $gdprBlock.find('.gdprpopup_class').toggleClass('popup_opened');
-	    });
-	});
-	jQuery.noConflict();
+<script type="text/javascript">
+(function () {
+    var block = document.querySelector('.gdprnewsletter_<?php echo $rnd_str; ?>');
+    if (!block) return;
+    var input = block.querySelector('input[name="gdprnewsletter_confirmation"]');
+    var form = block.closest('form');
+    var buttons = form ? form.querySelectorAll('button[type="submit"]') : [];
+    function setDisabled(state) {
+        for (var i = 0; i < buttons.length; i++) buttons[i].disabled = state;
+    }
+    setDisabled(true);
+    function toggle(state) {
+        input.checked = state;
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    block.querySelector('.gdprpopup_yes').addEventListener('click', function () { toggle(true); });
+    block.querySelector('.gdprpopup_no').addEventListener('click', function () { toggle(false); });
+    block.querySelector('.gdprpopup-state').addEventListener('change', function () {
+        document.documentElement.classList.toggle('modal_opened');
+        document.body.classList.toggle('modal_opened');
+        block.querySelector('.gdprpopup_class').classList.toggle('popup_opened');
+    });
+    input.addEventListener('change', function () { setDisabled(!this.checked); });
+})();
 </script>
 <?php endif; ?>

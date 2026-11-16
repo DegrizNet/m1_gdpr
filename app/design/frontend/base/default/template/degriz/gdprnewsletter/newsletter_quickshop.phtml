@@ -1,9 +1,6 @@
 <?php if ($this->getIsActive()):
 
-    $rnd_str = "";
-    $base_str = "0123456789abcdefghijklmnopqrstuvwxyz";
-    $su = strlen($base_str) - 1;
-    $rnd_str = substr($base_str, rand(0,$su), 1).substr($base_str, rand(0,$su), 1).substr($base_str, rand(0,$su), 1);
+    $rnd_str = substr(md5(uniqid('', true)), 0, 8);
 
 ?>
 	<div class="degriz_gdprnewsletter gdprnewsletter_<?php echo $rnd_str; ?>">
@@ -27,23 +24,22 @@
 			</div>
 		</div>
 	</div>
-<script type='text/javascript'>
-	jQuery(function($) {
-	    var $gdprBlock = $('.gdprnewsletter_<?php echo $rnd_str; ?>');
-	    var $gdprInput = $('input[name="is_subscribed"]');
-	    $gdprBlock.find('.gdprpopup_yes').click(function(){
-	        $gdprInput.prop('checked', true);
-	        $gdprInput.trigger('change');
-	    });
-	    $gdprBlock.find('.gdprpopup_no').click(function(){
-	        $gdprInput.prop('checked', false);
-	        $gdprInput.trigger('change');
-	    });
-	    $gdprBlock.find('#gdprpopup_<?php echo $rnd_str; ?>').change(function() {
-	        $('body,html').toggleClass('modal_opened');
-	        $gdprBlock.find('.gdprpopup_class').toggleClass('popup_opened');
-	    });
-	});
-	jQuery.noConflict();
+<script type="text/javascript">
+(function () {
+    var block = document.querySelector('.gdprnewsletter_<?php echo $rnd_str; ?>');
+    var input = document.querySelector('input[name="is_subscribed"]');
+    if (!block || !input) return;
+    function toggle(state) {
+        input.checked = state;
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    block.querySelector('.gdprpopup_yes').addEventListener('click', function () { toggle(true); });
+    block.querySelector('.gdprpopup_no').addEventListener('click', function () { toggle(false); });
+    block.querySelector('.gdprpopup-state').addEventListener('change', function () {
+        document.documentElement.classList.toggle('modal_opened');
+        document.body.classList.toggle('modal_opened');
+        block.querySelector('.gdprpopup_class').classList.toggle('popup_opened');
+    });
+})();
 </script>
 <?php endif; ?>
